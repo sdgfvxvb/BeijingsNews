@@ -1,7 +1,9 @@
 package com.example.beijingnews.activity;
 
+import android.app.AppComponentFactory;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.beijingnews.R;
@@ -11,7 +13,7 @@ import com.example.beijingnews.utils.DensityUtils;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class MainActivity extends SlidingFragmentActivity {
+public class MainActivity extends AppCompatActivity {
 
     public static final String MAIN_CONTENT_TAG = "main_content_tag";
     public static final String LEFTMENU_TAG = "leftmenu_tag";
@@ -23,12 +25,11 @@ public class MainActivity extends SlidingFragmentActivity {
         setContentView(R.layout.activity_main);
 
 //        设置左侧菜单
-        setBehindContentView(R.layout.activity_leftmenu);
-
-        SlidingMenu slidingMenu = getSlidingMenu();
-        slidingMenu.setMode(SlidingMenu.LEFT);
+        SlidingMenu slidingMenu = new SlidingMenu(this);
+        slidingMenu.setMenu(R.layout.activity_leftmenu);
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         slidingMenu.setBehindOffset(DensityUtils.dip2px(this, 200));
+        slidingMenu.attachToActivity(this, SlidingMenu.LEFT);
 
         initFragment();
     }
