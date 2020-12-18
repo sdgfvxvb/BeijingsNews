@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="darker_gray">#FFC5C1C1</color>
     <color name="holo_red_light">#EF0A0A</color>
+    <color name="colorPrimary">#FF297EE6</color>
+    <color name="colorPrimaryDark">#FF1026E6</color>
+    <color name="colorAccent">#FFD810E6</color>
 </resources>

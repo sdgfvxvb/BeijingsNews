@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="MissingDefaultResource">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_page"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:background="@drawable/bottom_tab_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            android:gravity="center"
+            android:text="主页"
+            android:drawableTop="@drawable/rb_home_drawable_selector"
+            style="@style/bottom_tag_style"/>
+
+        <RadioButton
+            android:id="@+id/rb_news_center"
+            android:gravity="center"
+            android:text="新闻"
+            android:drawableTop="@drawable/rb_news_center_drawable_selector"
+            style="@style/bottom_tag_style"/>
+
+        <RadioButton
+            android:id="@+id/rb_smart_service"
+            android:gravity="center"
+            android:text="智慧"
+            android:drawableTop="@drawable/rb_smart_service_drawable_selector"
+            style="@style/bottom_tag_style"/>
+
+        <RadioButton
+            android:id="@+id/rb_govaffair"
+            android:gravity="center"
+            android:text="政要"
+            android:drawableTop="@drawable/rb_govaffair_drawable_selector"
+            style="@style/bottom_tag_style"/>
+
+        <RadioButton
+            android:id="@+id/rb_setting"
+            android:gravity="center"
+            android:text="主页"
+            android:drawableTop="@drawable/rb_setting_drawable_selector"
+            style="@style/bottom_tag_style"/>
+
+    </RadioGroup>
+
+</LinearLayout>
