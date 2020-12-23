@@ -11,16 +11,20 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.beijingnews.R;
 import com.example.beijingnews.base.BaseFragment;
 
+import org.xutils.view.annotation.ViewInject;
+import org.xutils.x;
+
 public class ContentFragment extends BaseFragment {
 
+    @ViewInject(R.id.view_page)
     private ViewPager viewPager;
+    @ViewInject(R.id.rg_main)
     private RadioGroup rg_main;
 
     @Override
     public View initView() {
         View view = View.inflate(context, R.layout.content_fragment, null);
-        viewPager = view.findViewById(R.id.view_page);
-        rg_main = view.findViewById(R.id.rg_main);
+        x.view().inject(ContentFragment.this, view);
         return view;
     }
 
