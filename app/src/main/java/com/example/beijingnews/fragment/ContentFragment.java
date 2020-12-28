@@ -57,13 +57,13 @@ public class ContentFragment extends BaseFragment {
 
         rg_main.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
 
-        viewPager.addOnPageChangeListener(new MyOnPageChageListener());
+        viewPager.addOnPageChangeListener(new MyOnPageChangeListener());
 
         rg_main.check(R.id.rb_home);
         basePagers.get(0).initData();
     }
 
-    class MyOnPageChageListener implements ViewPager.OnPageChangeListener {
+    class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
