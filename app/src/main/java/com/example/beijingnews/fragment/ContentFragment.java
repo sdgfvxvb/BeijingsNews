@@ -1,17 +1,16 @@
 package com.example.beijingnews.fragment;
 
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.beijingnews.R;
+import com.example.beijingnews.activity.MainActivity;
+import com.example.beijingnews.adapter.ContentFragmentAdapter;
 import com.example.beijingnews.base.BaseFragment;
 import com.example.beijingnews.base.BasePager;
 import com.example.beijingnews.pager.GovaffairPager;
@@ -20,6 +19,7 @@ import com.example.beijingnews.pager.NewsCenterPager;
 import com.example.beijingnews.pager.SettingPager;
 import com.example.beijingnews.pager.SmartServicePager;
 import com.example.beijingnews.view.NoScrollViewPager;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
@@ -53,7 +53,7 @@ public class ContentFragment extends BaseFragment {
         basePagers.add(new GovaffairPager(context));
         basePagers.add(new SettingPager(context));
 
-        viewPager.setAdapter(new ContentFragmentAdapter());
+        viewPager.setAdapter(new ContentFragmentAdapter(basePagers));
 
         rg_main.setOnCheckedChangeListener(new MyOnCheckedChangeListener());
 
@@ -61,6 +61,7 @@ public class ContentFragment extends BaseFragment {
 
         rg_main.check(R.id.rb_home);
         basePagers.get(0).initData();
+        isEnableSlidingMenu(SlidingMenu.TOUCHMODE_NONE);
     }
 
     class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
@@ -87,49 +88,33 @@ public class ContentFragment extends BaseFragment {
             switch (checkedId) {
                 case R.id.rb_home:
                     viewPager.setCurrentItem(0, false);
+                    isEnableSlidingMenu(SlidingMenu.TOUCHMODE_NONE);
                     break;
                 case R.id.rb_news_center:
                     viewPager.setCurrentItem(1, false);
+                    isEnableSlidingMenu(SlidingMenu.TOUCHMODE_FULLSCREEN);
                     break;
                 case R.id.rb_smart_service:
                     viewPager.setCurrentItem(2, false);
+                    isEnableSlidingMenu(SlidingMenu.TOUCHMODE_NONE);
                     break;
                 case R.id.rb_govaffair:
                     viewPager.setCurrentItem(3, false);
+                    isEnableSlidingMenu(SlidingMenu.TOUCHMODE_NONE);
                     break;
                 case R.id.rb_setting:
                     viewPager.setCurrentItem(4, false);
+                    isEnableSlidingMenu(SlidingMenu.TOUCHMODE_NONE);
                     break;
             }
         }
     }
 
-    class ContentFragmentAdapter extends PagerAdapter {
-        @Override
-        public int getCount() {
-            return basePagers.size();
-        }
-
-        @NonNull
-        @Override
-        public Object instantiateItem(@NonNull ViewGroup container, int position) {
-            BasePager basePager = basePagers.get(position);
-            basePager.initData();
-            View rootView = basePager.rootView;
-            container.addView(rootView);
-            return rootView;
-        }
-
-        @Override
-        public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-            return view == object;
-        }
-
-        @Override
-        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-            container.removeView((View) object);
-        }
+    private void isEnableSlidingMenu(int touchmodeNone) {
+        MainActivity mainActivity = (MainActivity) context;
+        mainActivity.slidingMenu.setTouchModeAbove(touchmodeNone);
     }
+
 
 
 }

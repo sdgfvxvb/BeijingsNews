@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String MAIN_CONTENT_TAG = "main_content_tag";
     public static final String LEFTMENU_TAG = "leftmenu_tag";
+    public SlidingMenu slidingMenu;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,13 +29,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        设置左侧菜单
-        SlidingMenu slidingMenu = new SlidingMenu(this);
+        initSlidingMenu();
+
+        initFragment();
+    }
+
+    private void initSlidingMenu() {
+        slidingMenu = new SlidingMenu(this);
         slidingMenu.setMenu(R.layout.activity_leftmenu);
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         slidingMenu.setBehindOffset(DensityUtils.dip2px(this, 200));
         slidingMenu.attachToActivity(this, SlidingMenu.LEFT);
-
-        initFragment();
     }
 
     private void initFragment() {
