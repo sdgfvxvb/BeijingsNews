@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.beijingnews.R;
@@ -47,5 +48,9 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.fl_main_content, new ContentFragment(), MAIN_CONTENT_TAG);
         ft.replace(R.id.fl_leftmenu, new LeftmenuFragment(), LEFTMENU_TAG);
         ft.commit();
+    }
+
+    public LeftmenuFragment getLeftmenuFragment() {
+        return (LeftmenuFragment) getSupportFragmentManager().findFragmentByTag(LEFTMENU_TAG);
     }
 }
