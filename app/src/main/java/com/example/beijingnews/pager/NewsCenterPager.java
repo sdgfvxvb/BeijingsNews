@@ -9,8 +9,13 @@ import android.widget.TextView;
 
 import com.example.beijingnews.activity.MainActivity;
 import com.example.beijingnews.base.BasePager;
+import com.example.beijingnews.base.MenuDetailBasePage;
 import com.example.beijingnews.domain.NewsCenterPagerBean;
 import com.example.beijingnews.fragment.LeftmenuFragment;
+import com.example.beijingnews.menudetailpager.InteracMenuDetailPager;
+import com.example.beijingnews.menudetailpager.NewsMenuDetailPager;
+import com.example.beijingnews.menudetailpager.PhotosMenuDetailPager;
+import com.example.beijingnews.menudetailpager.TopicMenuDetailPager;
 import com.example.beijingnews.utils.Constants;
 import com.google.gson.Gson;
 
@@ -18,12 +23,14 @@ import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsCenterPager extends BasePager {
 
     public static final String TAG = "NEWS_CENTER";
     private List<NewsCenterPagerBean.DataBean> data;
+    private ArrayList<MenuDetailBasePage> detailBasePages;
 
     public NewsCenterPager(Context context) {
         super(context);
@@ -83,11 +90,30 @@ public class NewsCenterPager extends BasePager {
 
         MainActivity mainActivity = (MainActivity) context;
         LeftmenuFragment leftmenuFragment = mainActivity.getLeftmenuFragment();
+
+        detailBasePages = new ArrayList<>();
+        detailBasePages.add(new NewsMenuDetailPager(context));
+        detailBasePages.add(new TopicMenuDetailPager(context));
+        detailBasePages.add(new PhotosMenuDetailPager(context));
+        detailBasePages.add(new InteracMenuDetailPager(context));
+
         leftmenuFragment.setData(data);
+
     }
 
     private NewsCenterPagerBean parsedJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, NewsCenterPagerBean.class);
+    }
+
+    public void swichPager(int position) {
+        tv_title.setText(data.get(position).getTitle());
+        fl_content.removeAllViews();
+
+        MenuDetailBasePage detailBasePage = detailBasePages.get(position);
+        View rootView = detailBasePage.rootView;
+        detailBasePage.initData();
+
+        fl_content.addView(rootView);
     }
 }

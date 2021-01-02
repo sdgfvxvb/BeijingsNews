@@ -14,6 +14,7 @@ import com.example.beijingnews.R;
 import com.example.beijingnews.activity.MainActivity;
 import com.example.beijingnews.base.BaseFragment;
 import com.example.beijingnews.domain.NewsCenterPagerBean;
+import com.example.beijingnews.pager.NewsCenterPager;
 import com.example.beijingnews.utils.DensityUtils;
 
 import java.util.List;
@@ -42,11 +43,18 @@ public class LeftmenuFragment extends BaseFragment {
                 MainActivity mainActivity = (MainActivity) context;
                 mainActivity.slidingMenu.toggle();
 
-
+                swichPager(prePosition);
             }
         });
 
         return listView;
+    }
+
+    private void swichPager(int position) {
+        MainActivity mainActivity = (MainActivity) context;
+        ContentFragment contentFragment = mainActivity.getContentFragment();
+        NewsCenterPager newsCenterPager = contentFragment.getNewsCenterPager();
+        newsCenterPager.swichPager(position);
     }
 
     @Override
@@ -57,11 +65,10 @@ public class LeftmenuFragment extends BaseFragment {
 
     public void setData(List<NewsCenterPagerBean.DataBean> data) {
         this.data = data;
-        for (int i = 0; i < data.size(); i++) {
-
-        }
         adapter = new LeftmenuFragmentAdapter();
         listView.setAdapter(adapter);
+
+        swichPager(prePosition);
     }
 
     class LeftmenuFragmentAdapter extends BaseAdapter {

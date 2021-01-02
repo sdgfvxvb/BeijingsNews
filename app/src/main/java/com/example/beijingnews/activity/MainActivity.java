@@ -53,4 +53,8 @@ public class MainActivity extends AppCompatActivity {
     public LeftmenuFragment getLeftmenuFragment() {
         return (LeftmenuFragment) getSupportFragmentManager().findFragmentByTag(LEFTMENU_TAG);
     }
+
+    public ContentFragment getContentFragment() {
+        return (ContentFragment) getSupportFragmentManager().findFragmentByTag(MAIN_CONTENT_TAG);
+    }
 }

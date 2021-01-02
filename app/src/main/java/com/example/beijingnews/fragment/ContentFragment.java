@@ -64,6 +64,10 @@ public class ContentFragment extends BaseFragment {
         isEnableSlidingMenu(SlidingMenu.TOUCHMODE_NONE);
     }
 
+    public NewsCenterPager getNewsCenterPager() {
+        return (NewsCenterPager) basePagers.get(1);
+    }
+
     class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
